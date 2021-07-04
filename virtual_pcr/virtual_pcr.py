@@ -47,11 +47,12 @@ def get_arguments():
 
 def reverse_complement(seq):
     base_dict = {"A": "T", "T": "A", "G": "C", "C": "G", "N": "N"}
-    return "".join([base_dict[i] for i in seq[::-1]])
+    return "".join([base_dict[i.upper()] for i in seq[::-1]])
 
 def check_chromosome(chrom_seq, in_args):
 
     results = {}
+
 
     # Pattern 1 is the forward primer binding on the forward strand
     # and the reverse primer binding downstream on the reverse strand
@@ -100,7 +101,7 @@ def generate_chromosome_dict(reference_genome):
                 chrom_list = []
                 chrom_line = genome_in.readline().strip("\n").strip("\r")
                 while chrom_line and not chrom_line.startswith(">"):
-                    chrom_list.append(chrom_line)
+                    chrom_list.append(chrom_line.upper())
                     chrom_line = genome_in.readline().strip("\n").strip("\r")
                 line = chrom_line
                 chromosome = "".join(chrom_list)
@@ -109,6 +110,8 @@ def generate_chromosome_dict(reference_genome):
 
 def main():
     in_args = get_arguments()
+    in_args["f_primer"] = in_args["f_primer"].upper()
+    in_args["r_primer"] = in_args["r_primer"].upper()
 
     chrom_dict = generate_chromosome_dict(in_args["genome"])
 
