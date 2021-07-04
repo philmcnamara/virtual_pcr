@@ -6,6 +6,8 @@ Most in-silico PCR tools only search a predefined set of reference genomes, this
 
 Output is the position of the expected PCR fragment (chromosome name and base position) along with the expected size
 
+The tool is most easily run by cloning the respository and running the ```virtual_pcr.py``` script from the command line, using the following ```argparse``` flags
+
 ## Parameters
 
 | Parameter                | Short Flag | Long Flag     | Note                                                                       |
