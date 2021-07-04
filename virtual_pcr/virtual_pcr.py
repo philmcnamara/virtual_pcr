@@ -3,7 +3,7 @@ import argparse
 
 def get_arguments():
     parser = argparse.ArgumentParser(
-        description="Virtual PCR"
+        description="Virtual PCR Tool"
     )
     parser.add_argument(
         "-g", "--genome",
@@ -50,21 +50,19 @@ def reverse_complement(seq):
     return "".join([base_dict[i] for i in seq[::-1]])
 
 def check_chromosome(chrom_seq, in_args):
-    # Pattern 1 is the forward primer binding on the forward strand
-    # and the reverse primer binding downstream on the reverse strand
-
-    # Pattern 2 is the reverse primer binding on the forward strand
-    # and the forward primer binding downstream on the reverse strand
 
     results = {}
 
+    # Pattern 1 is the forward primer binding on the forward strand
+    # and the reverse primer binding downstream on the reverse strand
     f_primer_1 = in_args["f_primer"]
     r_primer_1 = reverse_complement(in_args["r_primer"])
+    results["pattern 1"] = find_matches(chrom_seq, f_primer_1, r_primer_1, in_args)
 
+    # Pattern 2 is the reverse primer binding on the forward strand
+    # and the forward primer binding downstream on the reverse strand
     f_primer_2 = in_args["r_primer"]
     r_primer_2 = reverse_complement(in_args["f_primer"])
-
-    results["pattern 1"] = find_matches(chrom_seq, f_primer_1, r_primer_1, in_args)
     results["pattern 2"] = find_matches(chrom_seq, f_primer_2, r_primer_2, in_args)
 
     return results
