@@ -1,6 +1,6 @@
 # Virtual PCR
 
-This program checks off-target binding of primers to the reference genome after design with Primer3 or similar software
+This program checks off-target binding of primers to the reference genome after design with Primer3 or similar software, with the goal of ensuring the specificity of your PCR reaction
 
 Most in-silico PCR tools only search a predefined set of reference genomes, this tool allows the user the supply any FASTA file as the genome
 
